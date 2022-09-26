@@ -4,6 +4,8 @@ pragma solidity ^0.8.0;
 import "@thirdweb-dev/contracts/base/ERC1155LazyMint.sol";
 
 contract ScavengerHuntERC1155 is ERC1155LazyMint {
+    event TreasureFound(address indexed account);
+
     mapping(address => mapping(uint256 => bool)) private finders;
 
     constructor(
@@ -24,6 +26,8 @@ contract ScavengerHuntERC1155 is ERC1155LazyMint {
         );
 
         finders[_claimer][0] = true;
+
+        emit TreasureFound(_claimer);
     }
 
     function verifyClaim(
